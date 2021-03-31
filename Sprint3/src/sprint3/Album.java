@@ -1,5 +1,4 @@
 package sprint3;
-import java.util.*;
 
 
 /**
@@ -9,13 +8,6 @@ import java.util.*;
  */
 
 public class Album extends PhotographContainer{
-
-	//A string containing the album's name
-	private String name;
-	
-	
-	//Array list of photos in the album
-	private ArrayList<Photograph> photos = new ArrayList<Photograph>();
 
 	
 	/**
