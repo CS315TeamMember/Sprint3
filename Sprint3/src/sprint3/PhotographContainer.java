@@ -1,9 +1,17 @@
 package sprint3;
-
 import java.util.ArrayList;
+
+/**
+ * Sprint 3
+ * @author Alex Dozzi
+ * 
+ */
+
 
 public class PhotographContainer {
 	
+	
+	public PhotographContainer() {}
 	
 	/**
 	 * Constructor for a PhotographContainer object. Takes in a string as the name for a given album.
@@ -14,7 +22,7 @@ public class PhotographContainer {
 	}
 
 	//A string containing the album's name
-	private String name;
+	protected String name;
 	
 	
 	//Array list of photos in the album
@@ -22,8 +30,8 @@ public class PhotographContainer {
 
 	
 	/**
-	 * Accessor for an Album object. Returns the name of the album.  
-	 * @return (name): name of the album
+	 * Accessor for a PhotographContainer object. Returns the name of the PhotographContainer.  
+	 * @return (name): name of the PhotographContainer
 	 */
 	public String getName() {
 		return name;
@@ -31,8 +39,8 @@ public class PhotographContainer {
 	
 	
 	/**
-	 * Mutator for an Album object. Rename an album.
-	 * @param (name): name of the album
+	 * Mutator for a PhotographContainer object. Rename a PhotographContainer.
+	 * @param (name): name of the PhotographContainer
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -43,7 +51,7 @@ public class PhotographContainer {
 	}
 	
 	/**
-	 * Method that adds a photograph to an Album object.
+	 * Method that adds a photograph to an PhotographContainer object.
 	 * @param (p): instance of photograph
 	 * @return (boolean): returns true or false
 	 */
@@ -53,7 +61,7 @@ public class PhotographContainer {
 	
 	
 	/**
-	 * Method that determines if a Photograph is in the Album object.
+	 * Method that determines if a Photograph is in the PhotographContainer object.
 	 * @param (p): instance of photograph
 	 * @return (boolean): returns true or false
 	 */
@@ -64,7 +72,7 @@ public class PhotographContainer {
 	
 	
 	/**
-	 * Method that removes a Photograph from an Album if it is in the object.
+	 * Method that removes a Photograph from a PhotographContainer if it is in the object.
 	 * @param (p): instance of photograph
 	 * @return (boolean): returns true or false
 	 */
@@ -75,8 +83,8 @@ public class PhotographContainer {
 	
 	
 	/**
-	 * Method that determines how many Photographs are in the album.
-	 * @return (numPhotos): An integer representing the number of photos in the album.
+	 * Method that determines how many Photographs are in the PhotographContainer.
+	 * @return (numPhotos): An integer representing the number of photos in the PhotographContainer.
 	 */
 	public int numPhotographs() {
 		return getPhotos().size();
@@ -85,8 +93,8 @@ public class PhotographContainer {
 	
 	
 	/**
-	 * Method that determines if the current Album  object's  name  value  is  equal  to  the  name  value  of  the  object passed
-	 * @param (p): object being compared to the Album object
+	 * Method that determines if the current PhotographContainer  object's  name  value  is  equal  to  the  name  value  of  the  object passed
+	 * @param (p): object being compared to the PhotographContainer object
 	 * @return (boolean): returns true or false
 	 */
 	public boolean equals(Object o) {
@@ -111,8 +119,8 @@ public class PhotographContainer {
 	
 			
 	/**
-	 * Method that returns the Album name and the filenames of the photographs in the Album as a string.
-	 * @return (String): String of Album name and photos.
+	 * Method that returns the PhotographContainer name and the filenames of the photographs in the PhotographContainer as a string.
+	 * @return (String): String of PhotographContainer name and photos.
 	 * @author Adair Tabb
 	 */
 	public String toString() {
@@ -125,7 +133,7 @@ public class PhotographContainer {
 	
 	
 	/**
-	 * Returns a unique integer that corresponds to the given Album. Overrides hashcode()
+	 * Returns a unique integer that corresponds to the given PhotographContainer. Overrides hashcode()
 	 * @return (int): Returns an integer.
 	 */
 	@Override
