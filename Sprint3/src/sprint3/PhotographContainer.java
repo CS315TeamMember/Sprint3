@@ -1,4 +1,6 @@
 package sprint3;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,7 +30,7 @@ public class PhotographContainer {
 	
 	
 	//Array list of photos in the album
-	private ArrayList<Photograph> photos = new ArrayList<Photograph>();
+	protected ArrayList<Photograph> photos = new ArrayList<Photograph>();
 
 	
 	/**
@@ -90,7 +92,6 @@ public class PhotographContainer {
 	 */
 	public int numPhotographs() {
 		return getPhotos().size();
-		
 	}
 	
 	
@@ -105,19 +106,17 @@ public class PhotographContainer {
 		}
 		if (!(o instanceof Album)) {
 			return false;
-		}
+			}
 		else {
 			Album a = (Album)o;
-			
-		
 			if  (a.getName().equals(name)) {
 				return true;
-		}
+			}
 			else {
 				return false;
+			}
 		}
-		}
-		}
+	}
 	
 			
 	/**
@@ -185,7 +184,24 @@ public class PhotographContainer {
 		return photosInYear;
 	}
 		
-		
+	/**
+	 * Helper method to convert strings to dates.
+	 * @author Dr. Olteanu?
+	 * @param strDate A string of the current date.
+	 * @return Returns an instance of the date object. 
+	 * 
+	 */
+	private Date convertStringtoDate(String dateStr) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = sdf.parse(dateStr);
+		}
+		catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
+	}	
 		
 	/**
 	 * Returns an ArrayList of photos from the photos feed that were taken in the month and year provided.

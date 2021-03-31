@@ -150,13 +150,8 @@ public class PhotoLibrary extends PhotographContainer{
 	 * @return Returns true if the add was successful, false otherwise.
 	 */
 	public boolean createAlbum(String albumName) {
-		if (!albums.contains(albumName)) {
-			Album a1 = new Album(albumName);
-			return albums.add(a1);
-		}
-		else {
-			return false;
-		}
+		Album a1 = new Album(albumName);
+		return albums.add(a1);
 	}
 	
 	/**
@@ -184,8 +179,13 @@ public class PhotoLibrary extends PhotographContainer{
 	 * @return Returns true if the Photograph was added; return false if it was not added.
 	 */
 	public boolean addPhotoToAlbum(Photograph p, String albumName) {
-		if (photos.contains(p)) {
-			return getAlbumByName(albumName).addPhoto(p);
+		if (getAlbumByName(albumName) != null) {
+			if (photos.contains(p)) {
+				return getAlbumByName(albumName).addPhoto(p);
+			}
+			else {
+				return false;
+			}
 		}
 		else {
 			return false;
@@ -200,12 +200,7 @@ public class PhotoLibrary extends PhotographContainer{
 	 * @return Returns true if the photo was successfully removed. Otherwise return false.
 	 */
 	public boolean removePhotoFromAlbum(Photograph p, String albumName) {
-		if (hasPhoto(p)) {
-			return getAlbumByName(albumName).removePhoto(p);
-		}
-		else {
-			return false;
-		}
+		return getAlbumByName(albumName).removePhoto(p);
 	}
 	
 	/**
@@ -215,33 +210,13 @@ public class PhotoLibrary extends PhotographContainer{
 	 * @return Returns the Album. If an album with that name is not found, returns null.
 	 */
 	private Album getAlbumByName(String albumName) {
-		Album albumSearched = null;
 		for(Album album1: albums) {
 			if (album1.getName().equals(albumName)){
-				albumSearched = album1;
+				return album1;
 			}
 		}
-		return albumSearched;
+		
+		return null;
 	}
-	
-	/**
-	 * Helper method to convert strings to dates.
-	 * @author Dr. Olteanu?
-	 * @param strDate A string of the current date.
-	 * @return Returns an instance of the date object. 
-	 * 
-	 */
-	private Date convertStringtoDate(String dateStr) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = sdf.parse(dateStr);
-		}
-		catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return date;
-	}
-	
 	
 }
