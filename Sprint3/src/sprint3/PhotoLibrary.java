@@ -374,8 +374,10 @@ public class PhotoLibrary{
 	
 	/**
 	 * Helper method to convert strings to dates.
+	 * @author Dr. Olteanu?
 	 * @param strDate A string of the current date.
 	 * @return Returns an instance of the date object. 
+	 * 
 	 */
 	private Date convertStringtoDate(String dateStr) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
