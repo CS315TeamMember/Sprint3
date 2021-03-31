@@ -14,6 +14,16 @@ import java.util.Date;
 
 public class PhotographContainer {
 	
+
+	/**
+	 * A string containing the album's name
+	 */
+	protected String name;
+	
+	/**
+	 * Array list of photos in the album
+	 */
+	protected ArrayList<Photograph> photos = new ArrayList<Photograph>();
 	
 	public PhotographContainer() {}
 	
@@ -23,15 +33,8 @@ public class PhotographContainer {
 	 */
 	public PhotographContainer(String name) {
 		this.name = name;
+		
 	}
-
-	//A string containing the album's name
-	protected String name;
-	
-	
-	//Array list of photos in the album
-	protected ArrayList<Photograph> photos = new ArrayList<Photograph>();
-
 	
 	/**
 	 * Accessor for a PhotographContainer object. Returns the name of the PhotographContainer.  
