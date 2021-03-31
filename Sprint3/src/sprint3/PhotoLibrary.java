@@ -40,6 +40,13 @@ public class PhotoLibrary extends PhotographContainer{
 	public int getId() {
 		return ID;
 	}
+	/**
+	 * @author Evelina
+	 * Accessor/getter for albums
+	 */
+	public HashSet<Album> getAlbums(){
+		return albums;
+	}
 	
 	
 	/**
@@ -58,8 +65,14 @@ public class PhotoLibrary extends PhotographContainer{
 			return false;
 		}
 		else {
+			String albumName = null;
 			photos.remove(p);
-			albums.remove(p); //removePhotoFromAlbum?
+			for(Album album1: albums) {
+				if (album1.hasPhoto(p)){
+					albumName = album1.getName();
+				}
+			}
+			removePhotoFromAlbum(p, albumName); //removePhotoFromAlbum?
 			return getPhotos().remove(p);
 		}
 		
