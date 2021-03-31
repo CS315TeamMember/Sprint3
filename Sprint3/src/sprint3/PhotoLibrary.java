@@ -9,24 +9,17 @@ import java.util.*;
 import java.util.Date;
 
 
-public class PhotoLibrary{
+public class PhotoLibrary extends PhotographContainer{
 	
 	/**
-	 * "name" is a string containing the PhotoLibrary's name in whatever
-	 * form it was provided
-	 * 
+	 *  
 	 * "id" is an integer containing the PhotoLibrary's unique id. Once
 	 * set it will never change.
-	 * 
-	 * "photos" is an ArrayList<Photograph> of photos the user has posted
-	 * to their feed in this library
 	 * 
 	 * "albums" is a Hashset of Albums that this user created. Each album will
 	 * then contain photos from this user's photos stream that they have organized into albums.
 	 */
-	private String name;
 	private final int ID;
-	private ArrayList<Photograph> photos = new ArrayList<Photograph>(); // Was declared but not instantiated. Fixed! (: -- Adair
 	private HashSet<Album> albums = new HashSet<Album>();
 	/**
 	 * Constructor for name and id
@@ -39,13 +32,6 @@ public class PhotoLibrary{
 		this.ID = id;		
 	}
 	
-	/**
-	 * Accessor/getter for name
-	 * @return name
-	 */
-	public String getName() {
-		return name;
-	}
 	
 	/**
 	 * Accessor/getter for id
@@ -55,13 +41,6 @@ public class PhotoLibrary{
 		return ID;
 	}
 	
-	/**
-	 * Accessor/getter for photos
-	 * @return ArrayList for photos
-	 */
-	public ArrayList<Photograph> getPhotos(){
-		return photos;
-	}
 	
 	/**
 	 * Mutator/setter for the field name
@@ -71,42 +50,10 @@ public class PhotoLibrary{
 		this.name = name;
 	}
 	
-
-	/**
-	 * Adds the photograph p to the current object's 
-	 * photo feed if and only if p is not already in the list
-	 * 
-	 * @param p represents a photograph
-	 * @return boolean operator returns true if photo was added
-	 * 		   boolean operator returns false if photo was not added
-	 */
-	public boolean addPhoto(Photograph p) {
-		if (!photos.contains(p)) {
-			return photos.add(p);
-		}
-		else {
-			return false;
-		}
-	}
-	
-	/**
-	 * 
-	 * @param p represents a photograph
-	 * @return
-	 */
-	//Checks to see if p is in the list of photos
-	public boolean hasPhoto(Photograph p) {
-		if (photos.contains(p)) {
-			return getPhotos().contains(p);
-		}
-		else {
-			return false;
-		}
-	}
 	
 	//Erases a photo from the feed
 	//Modify this one
-	public boolean erasePhoto(Photograph p) {
+	public boolean removePhoto(Photograph p) {
 		if (!photos.contains(p)) {
 			return false;
 		}
@@ -117,15 +64,7 @@ public class PhotoLibrary{
 		}
 		
 	}
-	/**
-	 * Returns the number of photos in a photo feed.
-	 * @author Evelina
-	 * @return numPhotos 
-	 */
-	public int numPhotographs() {
-		int numPhotos = photos.size();
-		return numPhotos;
-	}
+	
 	
 	/**
 	 * This method is meant to compare one PhotoLibrary object against the current Photolibrary object and returns true or false depending on if the IDs match.
@@ -202,94 +141,7 @@ public class PhotoLibrary{
 		}
 	}
 	
-	/**
-	 * @author Evelina
-	 * Return an ArrayList of photos from the photos feed that have a rating greater than or equal to the given parameter.
-	 * @param rating Desired rating for a photo.
-	 * @return result Returns an ArrayList of photos
-	 */
-	public ArrayList<Photograph> getPhotos(int rating){
-		
-		if (rating >= 0 && rating <= 5) {
-			ArrayList<Photograph>result = new ArrayList<Photograph>();
-			for (Photograph photoA : photos) {
-				//How do I make sure its the rating for photoA being compared to the goal rating
-				if (photoA.getRating() >= rating){
-					result.add(photoA);
-				}
-			}
-			return result;
-		}
-		else {
-			return null;
-		}
-	}
 	
-	/**
-	 * Returns an ArrayList of photos from the photos from the photos feed that were taken in the year provided.
-	 * @author Alex Dozzi
-	 * @param year Desired year in which the photo was taken.
-	 * @return result Returns an ArrayList of photos
-	 */
-	public ArrayList<Photograph> getPhotosInYear(int year){
-		ArrayList<Photograph>photosInYear = new ArrayList<Photograph>();
-		for (Photograph photo: photos) {
-			Date currDate = convertStringtoDate(photo.getDateTaken());		
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(currDate);
-			if (year == calendar.get(Calendar.YEAR)) {
-				photosInYear.add(photo);
-			}	
-		}
-		return photosInYear;
-		}
-		
-		
-		
-	/**
-	 * Returns an ArrayList of photos from the photos feed that were taken in the month and year provided.
-	 * @author Alex Dozzi
-	 * @param month Desired month the photo was taken.
-	 * @param year Desired year the photo was taken.
-	 * @return result Returns an ArrayList of Photos.
-	 */
-	public ArrayList<Photograph> getPhotosInMonth(int month, int year){
-			ArrayList<Photograph>photosInMonth = new ArrayList<Photograph>();
-			for (Photograph photo: photos) {
-				Date currDate = convertStringtoDate(photo.getDateTaken());	
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(currDate);
-				if (year == calendar.get(Calendar.YEAR) && month == calendar.get(Calendar.MONTH)) {
-					photosInMonth.add(photo);
-				}
-			}
-				return photosInMonth;
-				
-			}
-	/**
-	 * Return an ArrayList of photos from the photos feed that were taken between beginDate and endDate(inclusive).
-	 * @author Evelina
-	 * @param beginDate Set begin date.
-	 * @param endDate Set end date.
-	 * @return result An ArrayList of photos
-	 */
-	public ArrayList<Photograph> getPhotosBetween(String beginDate, String endDate){
-		ArrayList<Photograph>photosBetween = new ArrayList<Photograph>();
-		
-		Date start = convertStringtoDate(beginDate);
-		Date end = convertStringtoDate(endDate);
-	
-		for (Photograph photo: photos) {
-			Date currDate = convertStringtoDate(photo.getDateTaken());	
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(currDate);
-			if (currDate.before(end) && start.before(currDate)) {
-				photosBetween.add(photo);
-			}
-		}
-			return photosBetween;
-	
-	}
 	
 	/**
 	 * Creates a new Album with the name albumName if an Album with that name exists in the set of albums.

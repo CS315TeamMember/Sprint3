@@ -1,10 +1,12 @@
 package sprint3;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Sprint 3
  * @author Alex Dozzi
- * 
+ * @author Evelina
  */
 
 
@@ -141,7 +143,93 @@ public class PhotographContainer {
 		return name.hashCode();
 	}
 	
+	/**
+	 * @author Evelina
+	 * Return an ArrayList of photos from the photos feed that have a rating greater than or equal to the given parameter.
+	 * @param rating Desired rating for a photo.
+	 * @return result Returns an ArrayList of photos
+	 */
+	public ArrayList<Photograph> getPhotos(int rating){
+		
+		if (rating >= 0 && rating <= 5) {
+			ArrayList<Photograph>result = new ArrayList<Photograph>();
+			for (Photograph photoA : photos) {
+				//How do I make sure its the rating for photoA being compared to the goal rating
+				if (photoA.getRating() >= rating){
+					result.add(photoA);
+				}
+			}
+			return result;
+		}
+		else {
+			return null;
+		}
+	}	
+	
+	/**
+	 * Returns an ArrayList of photos from the photos from the photos feed that were taken in the year provided.
+	 * @author Alex Dozzi
+	 * @param year Desired year in which the photo was taken.
+	 * @return result Returns an ArrayList of photos
+	 */
+	public ArrayList<Photograph> getPhotosInYear(int year){
+		ArrayList<Photograph>photosInYear = new ArrayList<Photograph>();
+		for (Photograph photo: photos) {
+			Date currDate = convertStringtoDate(photo.getDateTaken());		
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(currDate);
+			if (year == calendar.get(Calendar.YEAR)) {
+				photosInYear.add(photo);
+			}	
+		}
+		return photosInYear;
+	}
 		
 		
+		
+	/**
+	 * Returns an ArrayList of photos from the photos feed that were taken in the month and year provided.
+	 * @author Alex Dozzi
+	 * @param month Desired month the photo was taken.
+	 * @param year Desired year the photo was taken.
+	 * @return result Returns an ArrayList of Photos.
+	 */
+	public ArrayList<Photograph> getPhotosInMonth(int month, int year){
+			ArrayList<Photograph>photosInMonth = new ArrayList<Photograph>();
+			for (Photograph photo: photos) {
+				Date currDate = convertStringtoDate(photo.getDateTaken());	
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(currDate);
+				if (year == calendar.get(Calendar.YEAR) && month == calendar.get(Calendar.MONTH)) {
+					photosInMonth.add(photo);
+				}
+			}
+			return photosInMonth;		
+		}
+	
+	/**
+	 * Return an ArrayList of photos from the photos feed that were taken between beginDate and endDate(inclusive).
+	 * @author Evelina
+	 * @param beginDate Set begin date.
+	 * @param endDate Set end date.
+	 * @return result An ArrayList of photos
+	 */
+	public ArrayList<Photograph> getPhotosBetween(String beginDate, String endDate){
+		ArrayList<Photograph>photosBetween = new ArrayList<Photograph>();
+		
+		Date start = convertStringtoDate(beginDate);
+		Date end = convertStringtoDate(endDate);
+	
+		for (Photograph photo: photos) {
+			Date currDate = convertStringtoDate(photo.getDateTaken());	
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(currDate);
+			if (currDate.before(end) && start.before(currDate)) {
+				photosBetween.add(photo);
+			}
+		}
+		return photosBetween;
+	
+	}
 
 }
