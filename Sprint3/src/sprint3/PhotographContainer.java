@@ -63,7 +63,12 @@ public class PhotographContainer {
 	 * @return (boolean): returns true or false
 	 */
 	public boolean addPhoto(Photograph p) {
-			return getPhotos().add(p);		
+		if (!getPhotos().contains(p)) {
+			return getPhotos().add(p);
+		}
+		else {
+			return false;
+		}	
 	}
 	
 	
@@ -107,11 +112,11 @@ public class PhotographContainer {
 		if (o == null){
 			return false;
 		}
-		if (!(o instanceof Album)) {
+		if (!(o instanceof PhotographContainer)) {
 			return false;
 			}
 		else {
-			Album a = (Album)o;
+			PhotographContainer a = (PhotographContainer)o;
 			if  (a.getName().equals(name)) {
 				return true;
 			}
@@ -132,7 +137,7 @@ public class PhotographContainer {
 		for(Photograph photo : photos) {
 			photographs.add(photo.getFileName());
 		}
-		return "Photo Album: " + name + "\nPhotographs: " + photographs;		
+		return "Name: " + name + "\nPhotographs: " + photographs;		
 	}
 	
 	
@@ -184,7 +189,12 @@ public class PhotographContainer {
 				photosInYear.add(photo);
 			}	
 		}
-		return photosInYear;
+		if (photosInYear.size() > 0) {
+			return photosInYear;
+		}
+		else {
+			return null;
+		}
 	}
 		
 	/**
@@ -215,15 +225,25 @@ public class PhotographContainer {
 	 */
 	public ArrayList<Photograph> getPhotosInMonth(int month, int year){
 			ArrayList<Photograph>photosInMonth = new ArrayList<Photograph>();
+			//ArrayList<Integer> testArray = new ArrayList<Integer>(); -- Getting the month wasn't working properly, so I was trying to figure out why. I still don't know why, but messing around with this commented out code did SOMETHING, I guess?? It runs correctly now. (Adair)
 			for (Photograph photo: photos) {
 				Date currDate = convertStringtoDate(photo.getDateTaken());	
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTime(currDate);
-				if (year == calendar.get(Calendar.YEAR) && month == calendar.get(Calendar.MONTH)) {
+				//Integer comparedMonth = calendar.get(calendar.MONTH);
+				//testArray.add(comparedMonth);
+			//}
+			//return testArray;
+				if (month == (calendar.get(Calendar.MONTH) + 1) && year == calendar.get(Calendar.YEAR)) {
 					photosInMonth.add(photo);
 				}
 			}
-			return photosInMonth;		
+			if(photosInMonth.size() > 0) {
+				return photosInMonth;
+			}
+			else {
+				return null;
+			}	
 		}
 	
 	/**
@@ -243,7 +263,7 @@ public class PhotographContainer {
 			Date currDate = convertStringtoDate(photo.getDateTaken());	
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(currDate);
-			if (currDate.before(end) && start.before(currDate)) {
+			if (currDate.before(end) && start.before(currDate) || start.equals(currDate)) {
 				photosBetween.add(photo);
 			}
 		}

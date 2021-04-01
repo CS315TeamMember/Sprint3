@@ -1,5 +1,6 @@
 package sprint3;
 
+import java.util.ArrayList;
 
 /**
  * Sprint 3
@@ -19,7 +20,19 @@ public class Album extends PhotographContainer{
 	}
 
 	
-
+	/**
+	 * Method that returns the Album name and the filenames of the photographs in the Album as a string. Overrides inherited method from PhotographContainer.
+	 * @return (String): String of Album name and photos.
+	 * @author Adair Tabb
+	 */
+	@Override
+	public String toString() {
+		ArrayList<String> photographs = new ArrayList<String>();
+		for(Photograph photo : photos) {
+			photographs.add(photo.getFileName());
+		}
+		return "Photo Album: " + name + "\nPhotographs: " + photographs;		
+	}
 	
 
 }

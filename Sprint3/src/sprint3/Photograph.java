@@ -1,5 +1,7 @@
 package sprint3;
 
+import java.util.*;
+
 /**
  * Sprint 1
  * @author Adair Tabb
@@ -12,7 +14,13 @@ package sprint3;
  *
  */
 
-public class Photograph {
+/**
+ * Sprint 3
+ * @author Adair Tabb
+ *
+ */
+
+public class Photograph implements Comparable<Photograph> {
 	/**
 	 * 
 	 * Stores the permanent filename of a Photograph object.
@@ -156,5 +164,20 @@ public class Photograph {
 	public int hashCode() {
 		String uniqueStr = FILENAME + "---" + caption + "---" + dateTaken;
 		return uniqueStr.hashCode();
+	}
+
+
+	@Override
+	public int compareTo(Photograph p) {
+		int result = this.getDateTaken().compareTo(p.getDateTaken());
+		if(result < 0) {
+			return result;
+		}
+		if (result > 0) {
+			return result;
+		}
+		else {
+			return this.getCaption().compareTo(p.getCaption());
+		}
 	}
 }

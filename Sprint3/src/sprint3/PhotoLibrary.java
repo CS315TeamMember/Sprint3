@@ -66,13 +66,12 @@ public class PhotoLibrary extends PhotographContainer{
 		}
 		else {
 			String albumName = null;
-			photos.remove(p);
 			for(Album album1: albums) {
 				if (album1.hasPhoto(p)){
 					albumName = album1.getName();
+					removePhotoFromAlbum(p, albumName);
 				}
 			}
-			removePhotoFromAlbum(p, albumName); //removePhotoFromAlbum?
 			return getPhotos().remove(p);
 		}
 		
@@ -222,7 +221,7 @@ public class PhotoLibrary extends PhotographContainer{
 	 * @param albumName Name of the album that is being searched for.
 	 * @return Returns the Album. If an album with that name is not found, returns null.
 	 */
-	private Album getAlbumByName(String albumName) {
+	Album getAlbumByName(String albumName) {
 		for(Album album1: albums) {
 			if (album1.getName().equals(albumName)){
 				return album1;
